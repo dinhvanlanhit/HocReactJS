@@ -1,4 +1,5 @@
-import UserList from './components/userList'
+import UserList from '../components/userList'
+import UserForm from '../components/userForm'
 import {useState} from 'react'
 function User() {
     const [usersList,setusersList]=useState(
@@ -17,12 +18,23 @@ function User() {
       newUserList.splice(index,1);
       setusersList(newUserList);
     }
+    function handelAddUser(params) {
+      const newUserList = [... usersList];
+      const user = {
+        id:usersList.length+1,
+        mail:params.mail
+      }
+      newUserList.push(user);
+      setusersList(newUserList);
+    }
     return (
       <>
         <br/>
+        <UserForm onSubmit={handelAddUser}/>
         <div className="card">
             <div className="card-header">Danh Sách Tài Khoản</div>
-            <div className="card-boody row">
+            <div className="card-boody ">
+              <div className="row">
               <div className="col-md-12">
               <table className="table table-bordered">
                       <thead>
@@ -37,7 +49,7 @@ function User() {
                      
                   </table>
               </div>
-                  
+              </div>
             </div>
         </div>
       </>
