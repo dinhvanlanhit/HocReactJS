@@ -2,6 +2,7 @@ import UserList from '../components/userList'
 import UserForm from '../components/userForm'
 import {useState} from 'react'
 function User() {
+    const [param,setPram]=useState(null);
     const [usersList,setusersList]=useState(
       [
         {id:1,mail:"001@gmail.com"},
@@ -10,9 +11,8 @@ function User() {
         {id:4,mail:"004@gmail.com"},
       ]
     );
-    function handelClick(user){
+    function onUserClickDelete(user){
       const index = usersList.findIndex(x=>x.id==user.id);
-        
       if(index<0)return;
       const newUserList = [... usersList];
       newUserList.splice(index,1);
@@ -27,10 +27,14 @@ function User() {
       newUserList.push(user);
       setusersList(newUserList);
     }
+    function onUserClickUpdate(params) {
+      setPram(params);
+      console.log(param);
+    }
     return (
       <>
         <br/>
-        <UserForm onSubmit={handelAddUser}/>
+        <UserForm onSubmit={handelAddUser}  showDataUpdate={param}/>
         <div className="card">
             <div className="card-header">Danh Sách Tài Khoản</div>
             <div className="card-boody ">
@@ -45,7 +49,11 @@ function User() {
                         </tr>
                       </thead>
                      
-                          <UserList users={usersList} onUserClick={handelClick}/>
+                          <UserList 
+                          users={usersList} 
+                          onUserClickDelete={onUserClickDelete}
+                          onUserClickUpdate={onUserClickUpdate}
+                          />
                      
                   </table>
               </div>

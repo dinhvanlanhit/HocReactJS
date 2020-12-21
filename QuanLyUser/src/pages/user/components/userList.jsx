@@ -3,17 +3,24 @@ import PropTypes from 'prop-types';
 
 UserList.propTypes ={
     users:PropTypes.array,
-    onUserClick:PropTypes.func
+    onUserClickDelete:PropTypes.func,
+    onUserClickUpdate:PropTypes.func
 }
 UserList.defaultProps ={
     users:[],
-    onUserClick:null
+    onUserClickDelete:null,
+    onUserClickUpdate:null
 }
 function UserList(props) {
-    const { users,onUserClick}= props;
-    function handleClick (user){
-        if(onUserClick){
-            onUserClick(user)
+    const { users,onUserClickDelete,onUserClickUpdate}= props;
+    function handleClickDelete (user){
+        if(onUserClickDelete){
+            onUserClickDelete(user)
+        }
+    }
+    function handleClickUpdatate (user){
+        if(onUserClickUpdate){
+            onUserClickUpdate(user)
         }
     }
     return (
@@ -24,8 +31,8 @@ function UserList(props) {
                         <td>{user.mail}</td> 
                         <td className="text-center">
                             <div className="btn-group">
-                                <button onClick={()=>handleClick(user)} className="btn btn-danger btn-sm">Xóa</button>
-                                <button className="btn btn-success btn-sm">Sửa</button>
+                                <button onClick={()=>handleClickDelete(user)} className="btn btn-danger btn-sm">Xóa</button>
+                                <button onClick={()=>handleClickUpdatate(user)}className="btn btn-success btn-sm">Sửa</button>
                             </div>
                         </td>  
                     </tr> 

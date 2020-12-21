@@ -2,13 +2,16 @@ import {React,useState} from 'react'
 import PropTypes from 'prop-types';
 
 UserForm.propTypes ={
-    onSubmit:PropTypes.func
+    onSubmit:PropTypes.func,
+    onShowDataUpdate:PropTypes.func,
+ 
 }
 UserForm.defaultProps ={
-    onSubmit:null
+    onSubmit:null,
+    onShowDataUpdate:null,
 }
 function UserForm(props) {
-    const {onSubmit}=props;
+    const {onSubmit,showDataUpdate}=props;
     const [mail, setMail] = useState('');
     function handelMailChange(e){
         setMail(e.target.value);
@@ -21,6 +24,11 @@ function UserForm(props) {
         }
         onSubmit(formValues);
         setMail('');
+    }
+
+    function handelShowUpdate(params) {
+        // setMail(params.mail)/
+        
     }
     return (
         <>
