@@ -4,11 +4,10 @@ import RouteHome from "../modules/home/route/route";
 import RouteUser from "../modules/user/route/route";
 function AdminLayout(props) {
     const match = useRouteMatch();
-    console.log(match);
     return (
         <Switch>
-            <Route path={`${match.url}/`} component={RouteHome} />       
-            <Route path={`${match.url}/user`} component={RouteUser} />       
+            <Route path='/user' component={RouteUser} />    
+            <Route path='/' component={RouteHome} />       
         </Switch>
     );
 }

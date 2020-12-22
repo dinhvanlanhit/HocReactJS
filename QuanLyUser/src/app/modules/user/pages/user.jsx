@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import UserList from '../components/userList'
 import UserForm from '../components/userForm'
 function User() {
+ 
     const [param,setPram]=useState(null);
     const [usersList,setusersList]=useState(
       [
@@ -41,7 +42,7 @@ function User() {
     //     fetchUserList();
     // },[]);
     return (
-      <>
+      <div className="container">
         <br/>
         <UserForm onSubmit={handelAddUser}  showDataUpdate={param}/>
         <div className="card">
@@ -57,7 +58,6 @@ function User() {
                             <th className="text-center">Tác vụ</th>  
                         </tr>
                       </thead>
-                     
                           <UserList 
                           users={usersList} 
                           onUserClickDelete={onUserClickDelete}
@@ -69,7 +69,7 @@ function User() {
               </div>
             </div>
         </div>
-      </>
+      </div>
     );
 }
 

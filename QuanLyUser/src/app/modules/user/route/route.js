@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect,useRouteMatch } from "
 import User from '../pages/user';
 
 function RouteUser () {
+       
         const match = useRouteMatch();
         console.log({ match });
         return (
