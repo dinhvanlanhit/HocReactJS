@@ -1,6 +1,6 @@
+import React, { useState, useEffect } from 'react';
 import UserList from '../components/userList'
 import UserForm from '../components/userForm'
-import {useState} from 'react'
 function User() {
     const [param,setPram]=useState(null);
     const [usersList,setusersList]=useState(
@@ -31,6 +31,15 @@ function User() {
       setPram(params);
       console.log(param);
     }
+    // useEffect(()=>{
+    //     async function fetchUserList(){
+    //         const requesturl = 'http://apidev.com/api/user/getAll';
+    //         const response  = await fetch(requesturl);
+    //         const responseJSON = await response.json();
+    //         console.log(responseJSON);
+    //     }
+    //     fetchUserList();
+    // },[]);
     return (
       <>
         <br/>
@@ -62,6 +71,6 @@ function User() {
         </div>
       </>
     );
-  }
-  
-  export default User;
+}
+
+export default User;
