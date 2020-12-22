@@ -10,7 +10,7 @@ function AdminLayout(props) {
             <div className="container">
                 <ul className="nav nav-pills nav-fill">
                     <li className="nav-item">
-                        <NavLink   className="nav-link " activeClassName="active" to="/">HOME</NavLink>
+                        <NavLink   className="nav-link " activeClassName="active" to="/dashboard" exact={true}>HOME</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink   className="nav-link" activeClassName="active" to="/user">USER</NavLink>
