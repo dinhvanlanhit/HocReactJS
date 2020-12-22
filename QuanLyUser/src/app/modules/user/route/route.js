@@ -6,7 +6,7 @@ import User from '../pages/user';
 function RouteUser () {
        
         const match = useRouteMatch();
-        console.log({ match });
+        console.log("Route User");
         return (
                 <Switch>
                     <Route  path={`${match.url}/`}  component={User} />

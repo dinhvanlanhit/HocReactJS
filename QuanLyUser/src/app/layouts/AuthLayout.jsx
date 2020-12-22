@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Route, Switch, Redirect,useRouteMatch } from "
 import RouteLogin from "../modules/login/route/route";
 function AuthLayout(props) {
     const match = useRouteMatch();
+    console.log('layout Auth',match)
     return (
         <Switch>
-            <Redirect exact from={`${match.url}/`} to={`${match.url}/login`}></Redirect>
-            <Route path={`${match.url}/login`} component={RouteLogin} />       
+            <Redirect exact from='/auth' to='/auth/login'></Redirect>
+            <Route path='/auth/login' component={RouteLogin} />       
         </Switch>
         
     );

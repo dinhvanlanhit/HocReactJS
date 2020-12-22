@@ -4,12 +4,8 @@ function Home(props) {
     return (
         <div className="container">
             <br></br>
-            <br></br>
             <div className="row">
-                <div className="col-md-3">
-
-                </div>
-                <div className="col-md-6">
+                <div className="col-md-12">
                     <div className="card">
                         <div className="card-header">TRANG CHU</div>
                         <div className="card-body">

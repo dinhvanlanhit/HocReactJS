@@ -5,7 +5,7 @@ import Home from '../pages/home';
 
 function RouteHome () {
         const match = useRouteMatch();
-        console.log({ match });
+        console.log("Route Home");
         return (
             
                 <Switch>

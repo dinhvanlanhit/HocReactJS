@@ -9,7 +9,7 @@ function App() {
               <Switch>
                   <Route path="/auth" component={AuthLayout}/>
                   <Route path="/" component={AdminLayout} />
-                  <Redirect from="*" to="/" />   
+                 
               </Switch>
         </Router>
   );
