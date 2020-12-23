@@ -1,17 +1,14 @@
-import {React,useState} from 'react'
+import {React,useState,useEffect} from 'react'
 import PropTypes from 'prop-types';
 
 UserForm.propTypes ={
-    onSubmit:PropTypes.func,
-    onShowDataUpdate:PropTypes.func,
- 
+    onSubmit:PropTypes.func
 }
 UserForm.defaultProps ={
-    onSubmit:null,
-    onShowDataUpdate:null,
+    onSubmit:null
 }
 function UserForm(props) {
-    const {onSubmit,showDataUpdate}=props;
+    const {onSubmit,data}=props;
     const [mail, setMail] = useState('');
     function handelMailChange(e){
         setMail(e.target.value);
@@ -25,11 +22,14 @@ function UserForm(props) {
         onSubmit(formValues);
         setMail('');
     }
-
-    function handelShowUpdate(params) {
-        // setMail(params.mail)/
-        
+    function showData(data){
+        if(data){
+            setMail(data.mail)
+        }
     }
+    useEffect(function(){
+        showData(data)
+    } , [data]);
     return (
         <>
         <br/>
@@ -45,6 +45,7 @@ function UserForm(props) {
                                     type="text"
                                     onChange={handelMailChange} 
                                     value={mail}
+                                  
                                     />
                                     <button type="submit" className="btn btn-success">Lưu</button>
                             </div>

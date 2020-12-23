@@ -3,6 +3,8 @@ import UserList from '../components/userList'
 import UserForm from '../components/userForm'
 function User() {
  
+    const [showform,setShowform]=useState(false);
+    const [action,setAction]=useState('insert');
     const [param,setPram]=useState(null);
     const [usersList,setusersList]=useState(
       [
@@ -30,7 +32,11 @@ function User() {
     }
     function onUserClickUpdate(params) {
       setPram(params);
-      console.log(param);
+      setShowform(true)
+    }
+    function showformUser(){
+      setShowform(!showform)
+
     }
     // useEffect(()=>{
     //     async function fetchUserList(){
@@ -44,7 +50,11 @@ function User() {
     return (
       <div className="container">
         <br/>
-        <UserForm onSubmit={handelAddUser}  showDataUpdate={param}/>
+        {showform==true?
+        <UserForm onSubmit={handelAddUser}  data={param} />
+        :<></>
+        }
+        
         <div className="card">
             <div className="card-header">Danh Sách Tài Khoản</div>
             <div className="card-boody ">
@@ -55,7 +65,7 @@ function User() {
                         <tr>
                             <th>ID</th>  
                             <th>Emal</th> 
-                            <th className="text-center">Tác vụ</th>  
+                            <th className="text-center"><button onClick={showformUser} className="btn btn-success">Thêm</button></th>  
                         </tr>
                       </thead>
                           <UserList 
