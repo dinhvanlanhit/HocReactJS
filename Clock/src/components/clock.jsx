@@ -23,7 +23,8 @@ function Clock() {
     },[]);
     return (
         <div>
-            <button className={"btn btn-"+classButton}>{timeString}</button>
+            <hr></hr>
+            <button className={"btn btn-block btn-"+classButton}>{timeString}</button>
         </div>
     );
 }
