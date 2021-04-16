@@ -19,7 +19,7 @@ export default function Sidebar() {
                                         <p> Bàn làm việc</p>
                                     </Link>
                                 </li>
-                                <li className="nav-item active">
+                                <li className="nav-item menu-open active">
                                     <a  href="#" className="nav-link">
                                         <i className="nav-icon fas fa-tachometer-alt" />
                                         <p>Quản lý công việc

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';  
 import Auth from './layouts/auth';
 import Admin from './layouts/admin'
+import './css/App.css'
 function App() {
   return (
     <Router>  

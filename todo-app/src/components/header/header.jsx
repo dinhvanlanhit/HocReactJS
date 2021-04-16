@@ -2,12 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Header() {
+    const handleClickCloseOpenSidebar=(e)=>{
+      e.preventDefault();
+        alert();
+    }
     return (
         <nav className="main-header navbar navbar-expand navbar-white navbar-light">
         {/* Left navbar links */}
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" data-widget="pushmenu" href="#" role="button"><i className="fas fa-bars" /></a>
+            <Link className="nav-link" onClick={(e)=>handleClickCloseOpenSidebar(e)}  to="" role="button"><i className="fas fa-bars" /></Link>
           </li>
 
         </ul>
