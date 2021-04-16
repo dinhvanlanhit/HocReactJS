@@ -1,15 +1,15 @@
 const initialState = {
-    statusSidebarOpenClose:false,
+    statusSidebarOpenClose:"",
+    statusSibladeMoblie:"",
+    status:true,
 }
 const mainReducer =(state = initialState,action)=>{
     switch(action.type){
-        case 'OPEN_SIDBAR':
+        case 'OPEN_CLOSE_SIDBAR':
             const newState = {...state};
-            if(action.body){
-                newState.statusSidebarOpenClose =false;
-            }else{
-                newState.statusSidebarOpenClose =true;
-            }
+            newState.statusSidebarOpenClose = action.body.statusSidebarOpenClose;
+            newState.statusSibladeMoblie = action.body.statusSibladeMoblie;
+            newState.status =action.body.status;
             return newState;
         default:
             return state;

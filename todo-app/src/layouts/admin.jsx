@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense,useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect, Switch, useRouteMatch } from 'react-router-dom';  
 import Header from '../components/header/header';
@@ -9,9 +9,8 @@ const RouterTodo = lazy(()=>import('../modules/todo/route/routerTodo'))
 function Admin() {
     const mainStore =  useSelector(state => state.mainReducer);
     const macth = useRouteMatch();
-    // console.log('Layout Admin',macth);
     return(
-        <div className={mainStore.statusSidebarOpenClose==true?"sidebar-collapse sidebar-mini layout-fixed":'sidebar-mini layout-fixed'}>     
+        <div className={"sidebar-mini layout-fixed "+mainStore.statusSidebarOpenClose+" "+mainStore.statusSibladeMoblie}>     
             <div className="wrapper">
                 <Header/>
                 <Sidebar/>
@@ -25,6 +24,7 @@ function Admin() {
                                 </Switch>
                         
                     </Suspense>
+                   
                 </div>
             </div>
         </div>
