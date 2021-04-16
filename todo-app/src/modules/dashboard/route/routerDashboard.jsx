@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch, useRouteMatch } from 
 const Dashboard = lazy(()=>import('../pages/dashboard'))
 function RouterDashboard() {
     const macth = useRouteMatch();
-    console.log('RouterDashboard',macth);
+    // console.log('RouterDashboard',macth);
     return (
         <>
         <Suspense fallback={<></>}>

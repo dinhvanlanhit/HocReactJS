@@ -4,7 +4,7 @@ import LazyLoad from '../components/lazyload/lazyload'
 const Login = lazy(()=>import('../modules/login/login'))
 function Auth() {
     const macth = useRouteMatch();
-    console.log(macth);
+    // console.log(macth);
     return(
         <Suspense fallback={<LazyLoad/>}>
             <div className="hold-transition login-page">

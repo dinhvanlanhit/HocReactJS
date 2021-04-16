@@ -1,17 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {CloseOpenSidebar} from '../../redux/actions/mainAction'
 export default function Header() {
-    const handleClickCloseOpenSidebar=(e)=>{
-      e.preventDefault();
-        alert();
+    const mainStore =  useSelector(state => state.mainReducer);
+    const dispatch = useDispatch();
+    const handleClickCloseOpenSidebar=(statusSidebarOpenClose)=>{
+      dispatch(CloseOpenSidebar(statusSidebarOpenClose))
+      console.log(mainStore);
     }
     return (
         <nav className="main-header navbar navbar-expand navbar-white navbar-light">
         {/* Left navbar links */}
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link" onClick={(e)=>handleClickCloseOpenSidebar(e)}  to="" role="button"><i className="fas fa-bars" /></Link>
+            <Link className="nav-link" onClick={()=>handleClickCloseOpenSidebar(mainStore.statusSidebarOpenClose)}  to="" role="button"><i className="fas fa-bars" /></Link>
           </li>
 
         </ul>
