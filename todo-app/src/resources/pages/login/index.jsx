@@ -1,19 +1,25 @@
+import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useHistory } from "react-router-dom";
+import {useDispatch} from 'react-redux'
+import {login} from '../../../redux/actions/authAction';
+
 const schema = yup.object().shape({
     username: yup.string().required("Không được bỏ trống !"),
     password: yup.string().required("Không được bỏ trống !"),
   });
-function Login(){
+function Login(props){
+    const dispatch = useDispatch();
     let history = useHistory();
     const { register, handleSubmit, formState:{ errors } } = useForm({
         resolver: yupResolver(schema)
     });
-    const handleLogin = (data)=>{
-        console.log(data);
-        history.push("/admin");
+    const handleLogin = (body)=>{
+        const action  = login(body);
+        // props.login(data);
+        // history.push("/admin");
     }
     return(
         <div className="container">

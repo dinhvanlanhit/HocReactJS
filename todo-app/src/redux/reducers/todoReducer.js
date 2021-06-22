@@ -13,11 +13,15 @@ const todoReducer =(state = initialState,action)=>{
         case "GET_ALL":
             return state;
         case "ADD":
-            const  newState = {...state};
-            newState.lists=action.body.lists
-            newState.loading=action.body.loading
-            return newState;
-            break;
+            const  addState = {...state};
+            addState.lists=action.body.lists
+            addState.loading=action.body.loading
+            return addState;
+        case "SEARCH":
+            const  searchState = {...state};
+            searchState.lists=action.body.lists
+            searchState.loading=action.body.loading
+            return searchState
         default:
             return state;
     }

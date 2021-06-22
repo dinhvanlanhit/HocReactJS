@@ -12,6 +12,7 @@ export default () => {
   return (
     <Router>
       <Switch>
+      
         <Redirect path="/login" to="/auth" ></Redirect>
         <Route path='/auth' >
           <Auth>
@@ -20,6 +21,7 @@ export default () => {
             </Switch>
           </Auth>
         </Route>
+       
         <Route path='/admin/:path?' exact>
           <Admin>
             <Switch>

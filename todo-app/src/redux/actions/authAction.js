@@ -1,6 +1,11 @@
+
 export const login=(body)=>{
-    return{
-        type:"LOGIN",
-        status:body
+    console.log(body);
+    return dispatch =>{
+        dispatch({
+            type:"LOGIN",
+            status:true,
+            info:body 
+        });
     }
 }
