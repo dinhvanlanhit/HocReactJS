@@ -7,7 +7,7 @@ import {useDispatch} from 'react-redux'
 import {login} from '../../../redux/actions/authAction';
 
 const schema = yup.object().shape({
-    username: yup.string().required("Không được bỏ trống !"),
+    email: yup.string().required("Không được bỏ trống !"),
     password: yup.string().required("Không được bỏ trống !"),
   });
 function Login(props){
@@ -38,9 +38,9 @@ function Login(props){
                                 </div>
                                 <div className="form-group">
                                         <label>Username</label>
-                                        <input {...register("username")} defaultValue="admin" placeholder="username ... " type="text" 
-                                        className={`form-control ${errors.username?'is-invalid':''}`}/>
-                                        <div className="invalid-feedback">{errors.username?.message}</div>
+                                        <input {...register("email")} defaultValue="dinhvanlanh.it@gmail.com" placeholder="email ... " type="text" 
+                                        className={`form-control ${errors.email?'is-invalid':''}`}/>
+                                        <div className="invalid-feedback">{errors.email?.message}</div>
                                         
                                 </div>
                                 <div className="form-group">
