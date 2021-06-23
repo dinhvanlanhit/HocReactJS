@@ -1,12 +1,12 @@
 import axiosClient from "./axiosClient";
 const authApi ={
-    login:async(params)=>{
+    login:(params)=>{
         const url = "/auth/login";
-        return await axiosClient.post(url,params)
+        return axiosClient.post(url,params)
     },
-    register:async(params)=>{
+    register:(params)=>{
         const url = "/auth/register";
-        return await axiosClient.post(url,params)
+        return axiosClient.post(url,params)
     }
 }
 export default authApi;

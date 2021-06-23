@@ -1,16 +1,28 @@
 import authApi from "../../api/authApi"
-export const  login  = async (body)=>{
-    const data = await authApi.login(body);
-    // return dispatch =>{
-    //     console.log(data);
-    //     // dispatch({
-    //     //     type:"LOGIN",
-    //     //     status:true,
-    //     //     info:body 
-    //     // });
-    // }
+const login=(body)=>{
+    return async dispatch => {
+        dispatch({
+            type:"LOGIN",
+            number_code: 0,
+            message: null,
+            status: null,
+            access_token:null,
+            token_type: null,
+            data:null,
+            expires_in: null
+        });
+        try {
+            const data = await authApi.login(body);
+            if(data.number_code==0){
+                dispatch(data);
+            }else{
+
+            }
+        } catch (error) {
+            console.log("login Lỗi")
+        }
+    }
 }
-export const  registerUser  = async (body)=>{
-    const data = await authApi.register(body);
-    console.log(data);
-}
+export const authActions = {
+    login
+};

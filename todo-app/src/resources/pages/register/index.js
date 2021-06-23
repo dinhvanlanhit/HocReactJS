@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useHistory } from "react-router-dom";
 import {useDispatch} from 'react-redux'
-import {registerUser} from '../../../redux/actions/authAction';
+import {userActions} from '../../../redux/actions/authAction';
 const schema = yup.object().shape({
     name: yup.string().required("Không được bỏ trống !"),
     email: yup.string().required("Không được bỏ trống !"),
@@ -18,7 +18,7 @@ function Register(props){
         resolver: yupResolver(schema)
     });
     const handleRegister = (body)=>{
-        const action  = registerUser(body);
+      
         
     }
     return(

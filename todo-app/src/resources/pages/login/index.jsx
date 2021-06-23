@@ -1,26 +1,23 @@
-import React from "react";
-import { Link} from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { useHistory } from "react-router-dom";
-import {useDispatch} from 'react-redux'
-import {login} from '../../../redux/actions/authAction';
-
+import {authActions} from '../../../redux/actions/authAction';
 const schema = yup.object().shape({
     email: yup.string().required("Không được bỏ trống !"),
     password: yup.string().required("Không được bỏ trống !"),
   });
 function Login(props){
     const dispatch = useDispatch();
-    let history = useHistory();
     const { register, handleSubmit, formState:{ errors } } = useForm({
         resolver: yupResolver(schema)
     });
     const handleLogin = (body)=>{
-        const action  = login(body);
-        // props.login(data);
-        // history.push("/admin");
+        const action = authActions.login(body);
+        console.log(action);
+        dispatch(action);
     }
     return(
         <div className="container">
@@ -33,7 +30,7 @@ function Login(props){
                             <h3 className="card-title">Đăng nhập</h3>
                         </div>
                         <div className="card-body">
-                            <form onSubmit={handleSubmit(handleLogin)}>
+                            <form name="login" onSubmit={handleSubmit(handleLogin)}>
                                 <div className="form-group">
                                     <h1 className="text-center"><b>TODO APP</b></h1>
                                 </div>
@@ -55,7 +52,10 @@ function Login(props){
                                         <Link to="/register"  className="btn btn-success btn-block pull-right">Register</Link>
                                     </div> 
                                     <div className="col-md-6">
-                                        <button type="submit" className="btn btn-info btn-block pull-left">Login</button>
+                                        <button type="submit" className="btn btn-info btn-block pull-left">
+                                       
+                                         Login
+                                         </button>
                                     </div>
                                 </div>
                             </form>
