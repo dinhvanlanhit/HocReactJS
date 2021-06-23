@@ -11,9 +11,12 @@ axiosClient.interceptors.request.use(function (config) {
     // Do something before request is sent
     return config;
 }, function (error) {
-
-    // Do something with request error
-    return Promise.reject(error);
+    if (401 === error.response.status) {
+        // handle error: inform user, go to login, etc
+    } else {
+        return Promise.reject(error);
+    }
+    
 });
 axiosClient.interceptors.response.use(response=>{
     if(response&&response.data){
@@ -21,6 +24,11 @@ axiosClient.interceptors.response.use(response=>{
     }
     return response;
 },(error)=>{
-    return Promise.reject(error)
+    console.log(error);
+    if (401 === error.response.status) {
+        // handle error: inform user, go to login, etc
+    } else {
+        return Promise.reject(error);
+    }
 });
 export default  axiosClient;

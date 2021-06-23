@@ -5,6 +5,7 @@ import Admin from '../resources/layouts/admin'
 import Auth from '../resources/layouts/auth'
 // view  auth 
 import Login from '../resources/pages/login/index'
+import Register from '../resources/pages/register/index'
 // views admin
 import Dashboard from '../resources/pages/dashboard/index'
 import TodoList from '../resources/pages/todo/todoList'
@@ -12,21 +13,17 @@ export default () => {
   return (
     <Router>
       <Switch>
-      
-        <Redirect path="/login" to="/auth" ></Redirect>
-        <Route path='/auth' >
-          <Auth>
-            <Switch>
-              <Route path='/'  component={Login} />
-            </Switch>
-          </Auth>
-        </Route>
-       
-        <Route path='/admin/:path?' exact>
+        <Route path='/login' exact component={Login} />
+        <Route path='/register'  component={Register} />
+        <Route>
           <Admin>
             <Switch>
-              <Route path='/admin' exact component={Dashboard} />
-              <Route path='/admin/todo'  component={TodoList} />
+              <Route path='/' exact component={Dashboard} />
+              <Route path='/todo'>
+                <Switch>
+                  <Route path='/todo/list'  component={TodoList} />
+                </Switch>
+            </Route>
             </Switch>
           </Admin>
         </Route>

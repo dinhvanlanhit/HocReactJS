@@ -5,22 +5,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useHistory } from "react-router-dom";
 import {useDispatch} from 'react-redux'
-import {login} from '../../../redux/actions/authAction';
-
+import {registerUser} from '../../../redux/actions/authAction';
 const schema = yup.object().shape({
+    name: yup.string().required("Không được bỏ trống !"),
     email: yup.string().required("Không được bỏ trống !"),
     password: yup.string().required("Không được bỏ trống !"),
   });
-function Login(props){
+function Register(props){
     const dispatch = useDispatch();
     let history = useHistory();
-    const { register, handleSubmit, formState:{ errors } } = useForm({
+    const { register , handleSubmit, formState:{ errors } } = useForm({
         resolver: yupResolver(schema)
     });
-    const handleLogin = (body)=>{
-        const action  = login(body);
-        // props.login(data);
-        // history.push("/admin");
+    const handleRegister = (body)=>{
+        const action  = registerUser(body);
+        
     }
     return(
         <div className="container">
@@ -30,12 +29,19 @@ function Login(props){
                 <div className="col-md-4">
                     <div className="card">
                         <div className="card-header">
-                            <h3 className="card-title">Đăng nhập</h3>
+                            <h3 className="card-title">Register</h3>
                         </div>
                         <div className="card-body">
-                            <form onSubmit={handleSubmit(handleLogin)}>
+                            <form onSubmit={handleSubmit(handleRegister)}>
                                 <div className="form-group">
                                     <h1 className="text-center"><b>TODO APP</b></h1>
+                                </div>
+                                <div className="form-group">
+                                        <label>Name</label>
+                                        <input {...register("name")} defaultValue="vanlanh" placeholder="name ... " type="text" 
+                                        className={`form-control ${errors.name?'is-invalid':''}`}/>
+                                        <div className="invalid-feedback">{errors.name?.message}</div>
+                                        
                                 </div>
                                 <div className="form-group">
                                         <label>Email</label>
@@ -52,10 +58,10 @@ function Login(props){
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-md-6">
-                                        <Link to="/register"  className="btn btn-success btn-block pull-right">Register</Link>
+                                        <Link to="/login"  className="btn btn-success btn-block pull-right">Login</Link>
                                     </div> 
                                     <div className="col-md-6">
-                                        <button type="submit" className="btn btn-info btn-block pull-left">Login</button>
+                                        <button type="submit" className="btn btn-info btn-block pull-left">Register</button>
                                     </div>
                                 </div>
                             </form>
@@ -67,4 +73,4 @@ function Login(props){
         </div>
     )
 }
-export default Login;
+export default Register

@@ -3,7 +3,7 @@ import {Link,useHistory} from "react-router-dom";
 function Header(){
     const history = useHistory();
     const handleLogout=(e)=>{
-        history.push("/auth")
+        history.push("/login")
     }
     return(
         <>
@@ -15,10 +15,10 @@ function Header(){
             <div className="collapse navbar-collapse" id="navbarColor01">
                 <ul className="navbar-nav mr-auto">
                 <li className="nav-item ">
-                    <Link className="nav-link" to="/admin">Dashboard</Link>
+                    <Link className="nav-link" to="/">Dashboard</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/admin/todo">Todo</Link>
+                    <Link className="nav-link" to="/todo/list">Todo</Link>
                 </li>
                 </ul>
                 <form className="form-inline">
