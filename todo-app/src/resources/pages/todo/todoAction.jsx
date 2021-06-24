@@ -28,10 +28,11 @@ function TodoAction(){
         }
     }
     const onChangeName=(e)=>{
-        setNameTodo(e.targe.value);
+        setNameTodo(e.target.value);
     }
     const onChangeStatus=(e)=>{
-        setStatusTodo(e.targe.value);
+        // console.log(e);
+        setStatusTodo(e.target.value);
     }
     useEffect(async ()=>{
         if(id){
@@ -51,12 +52,12 @@ function TodoAction(){
                             <div className="row">
                                     <div className="col-md-8">
                                         <div className="form-group">
-                                            <input defaultValue={nameTodo} onChange={(e)=>onChangeName(e)} type="text" name="name" placeholder="Todo name ... " className="form-control"/>
+                                            <input value={nameTodo} onChange={(e)=>onChangeName(e)} type="text" name="name" placeholder="Todo name ... " className="form-control"/>
                                         </div>
                                     </div>
                                     <div className="col-md-2">
                                         <div className="form-group">
-                                            <select  defaultValue={statusTodo} onChange={(e)=>onChangeStatus(e)} name="status"  className="form-control"> 
+                                            <select  value={statusTodo} onChange={(e)=>onChangeStatus(e)} name="status"  className="form-control"> 
                                                 <option value="1">OK</option>
                                                 <option value="0">NO OK</option>
                                              </select>

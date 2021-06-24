@@ -1,5 +1,10 @@
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
+import {todoActions} from '../../../../redux/actions/todoAction'
 function ItemList(props){
+    const history = useHistory();
+    const onDelete = async (body)=>{
+        // const result  = await todoActions.deleteData(body.id)
+    }   
     return(
         <>
             {
@@ -11,7 +16,7 @@ function ItemList(props){
                                 <td className="text-center">
                                     <div className="btn-group">
                                         <Link to={`/todo/edit/${x.id}`} className="btn btn-info btn-xs">Edit</Link>
-                                        <button className="btn btn-danger btn-xs">Delete</button>
+                                        <button type="button" className="btn btn-danger btn-xs">Delete</button>
                                     </div>                   
                                 </td>                    
                     </tr>
