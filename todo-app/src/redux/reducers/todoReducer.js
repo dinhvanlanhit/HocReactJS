@@ -1,23 +1,29 @@
 const initialState = {
-   lists:[],
+   data:{
+       lists:[],
+       per_page:0,
+       current_page:10,
+       total:0,
+   },
    loading:false
 }
 const todoReducer =(state = initialState,action)=>{
     switch(action.type){
         case "GET_ALL":
             const  getAll = {...state};
-            getAll.lists=action.lists
+            if(action.status=='success'){
+                getAll.data=action.data
+            }
             getAll.loading=action.loading
             return getAll;
-        case "ADD":
-            const  addState = {...state};
-            addState.lists=action.body.lists
-            addState.loading=action.body.loading
-            return addState;
+        case "UPDATE":
+            return state;
         case "SEARCH":
             const  searchState = {...state};
-            searchState.lists=action.body.lists
-            searchState.loading=action.body.loading
+            if(action.status=='success'){
+                searchState.data=action.data
+            }
+            searchState.loading= action.loading
             return searchState
         default:
             return state;

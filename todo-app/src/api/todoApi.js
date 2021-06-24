@@ -4,12 +4,16 @@ const todoApi ={
         const url = `/todo/getAll`;
         return axiosClient.get(url)
     },
+    search:(query)=>{
+        const url = `/todo/search?search=${query}`;
+        return axiosClient.get(url)
+    },
     create:(params)=>{
         const url = `/todo/create`;
         return axiosClient.post(url,params)
     },
-    getByID:(params)=>{
-        const url = `/todo/edit/${params.id}`;
+    getByID:(id)=>{
+        const url = `/todo/edit/${id}`;
         return axiosClient.get(url)
     },
     update:(params)=>{
