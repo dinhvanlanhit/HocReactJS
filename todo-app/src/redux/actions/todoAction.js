@@ -1,5 +1,4 @@
 import todoApi from './../../api/todoApi'
-import history from '../../helpers/history';
 const getAll=()=>{
     return async dispatch=>{
         dispatch({
@@ -68,10 +67,19 @@ const update = async (body)=>{
             
     }
 }
+const deleteData = async (id)=>{
+    try {
+        const data = await todoApi.delete(id);
+        return  data;
+    } catch (error) {
+            
+    }
+}
 export const todoActions = {
     getAll,
     search,
     getByID,
     update,
-    create
+    create,
+    deleteData
 };
