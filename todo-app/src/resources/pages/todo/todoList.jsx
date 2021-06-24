@@ -1,10 +1,13 @@
+import { useEffect } from 'react';
 import {useSelector,useDispatch} from 'react-redux'
 import ItemList from './components/item-todo';
-
+import {todoActions} from '../../../redux/actions/todoAction'
 function TodoList(){
     const stateTodo = useSelector(state => state.todoReducer);
-    console.log(stateTodo);
     const dispatch = useDispatch();
+    useEffect(function(){
+       dispatch(todoActions.getAll());
+    },[])
     return(
         <>
             <div className="card">

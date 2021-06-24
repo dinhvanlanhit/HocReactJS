@@ -1,17 +1,14 @@
 const initialState = {
-   lists:[
-       {
-           id:1,
-           name:"code",
-           status:true
-       }
-   ],
+   lists:[],
    loading:false
 }
 const todoReducer =(state = initialState,action)=>{
     switch(action.type){
         case "GET_ALL":
-            return state;
+            const  getAll = {...state};
+            getAll.lists=action.lists
+            getAll.loading=action.loading
+            return getAll;
         case "ADD":
             const  addState = {...state};
             addState.lists=action.body.lists
