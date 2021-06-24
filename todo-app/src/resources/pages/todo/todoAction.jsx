@@ -1,20 +1,31 @@
 import { useEffect, useState,use } from "react";
 import { useDispatch } from "react-redux";
-import {useParams} from 'react-router-dom'
+import {useParams,useHistory} from 'react-router-dom'
 import {todoActions} from '../../../redux/actions/todoAction';
-function TodoEdit(){
+function TodoAction(){
     const dispatch = useDispatch();
+    const history = useHistory();
     const {id}=useParams();
     const [nameTodo,setNameTodo] = useState("");
     const [statusTodo,setStatusTodo] = useState(0);
-    const onSaveTodo =(e)=>{
+    const onSaveTodo = async (e)=>{
         e.preventDefault();
         const body = {
             id:id,
             name:nameTodo,
             status:statusTodo
         }
-        dispatch(todoActions.update(body))
+        if(id){
+            const result =  await todoActions.update(body);
+            if(result.status=='success'){
+                history.push('/todo/list')
+            }
+        }else{
+            const result =  await todoActions.create(body);
+            if(result.status=='success'){
+                history.push('/todo/list')
+            }
+        }
     }
     const onChangeName=(e)=>{
         setNameTodo(e.targe.value);
@@ -23,9 +34,11 @@ function TodoEdit(){
         setStatusTodo(e.targe.value);
     }
     useEffect(async ()=>{
-       const data =  await todoActions.getByID(id);
-       setNameTodo(data.data.name);
-       setStatusTodo(data.data.status)
+        if(id){
+            const data =  await todoActions.getByID(id);
+            setNameTodo(data.data.name);
+            setStatusTodo(data.data.status)
+        }
     },[])
     return(
         <>
@@ -38,12 +51,12 @@ function TodoEdit(){
                             <div className="row">
                                     <div className="col-md-8">
                                         <div className="form-group">
-                                            <input value={nameTodo} onChange={(e)=>onChangeName(e)} type="text" name="name" placeholder="Todo name ... " className="form-control"/>
+                                            <input defaultValue={nameTodo} onChange={(e)=>onChangeName(e)} type="text" name="name" placeholder="Todo name ... " className="form-control"/>
                                         </div>
                                     </div>
                                     <div className="col-md-2">
                                         <div className="form-group">
-                                            <select  value={statusTodo} onChange={(e)=>onChangeStatus(e)} name="status"  className="form-control"> 
+                                            <select  defaultValue={statusTodo} onChange={(e)=>onChangeStatus(e)} name="status"  className="form-control"> 
                                                 <option value="1">OK</option>
                                                 <option value="0">NO OK</option>
                                              </select>
@@ -61,4 +74,4 @@ function TodoEdit(){
         </>
     );
 }
-export default TodoEdit;
+export default TodoAction;

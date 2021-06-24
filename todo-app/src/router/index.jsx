@@ -9,8 +9,7 @@ import Register from '../resources/pages/register/index'
 // views admin
 import Dashboard from '../resources/pages/dashboard/index'
 import TodoList from '../resources/pages/todo/todoList'
-import TodoEdit from '../resources/pages/todo/todoEdit'
-import TodoAdd from '../resources/pages/todo/todoAdd'
+import TodoAction from '../resources/pages/todo/todoAction'
 export default () => {
   return (
     <Router history={history}>
@@ -24,16 +23,13 @@ export default () => {
               <Route path='/todo'>
                 <Switch>
                   <Route path='/todo/list'  component={TodoList} />
-                  <Route path='/todo/add'  component={TodoAdd} />
-                  <Route path='/todo/edit/:id'  component={TodoEdit} />
+                  <Route path='/todo/add'  component={TodoAction} />
+                  <Route path='/todo/edit/:id'  component={TodoAction} />
                 </Switch>
             </Route>
             </Switch>
           </Admin>
         </Route>
-
-        
-       
       </Switch>
     </Router>
   )

@@ -16,8 +16,6 @@ const todoReducer =(state = initialState,action)=>{
             }
             getAll.loading=action.loading
             return getAll;
-        case "UPDATE":
-            return state;
         case "SEARCH":
             const  searchState = {...state};
             if(action.status=='success'){

@@ -52,59 +52,20 @@ const search=(query)=>{
         }
     }
 }
-const create =(body)=>{
-    return async dispatch=>{
-        dispatch({
-            type:"ADD",
-            loading:true
-        });
-        try {
-            const data = await todoApi.create(body);
-            if(data.status=='success'){
-                dispatch({
-                    type:"ADD",
-                    loading:false,
-                    status:'success'
-                });
-            }else{
-                dispatch({
-                    type:"ADD",
-                    loading:false,
-                    status:'error'
-                });
-            }
+const create = async (body)=>{
+    try {
+        const data = await todoApi.create(body);
+        return  data;
+    } catch (error) {
             
-        } catch (error) {
-            
-        }
     }
 }
-const update =(body)=>{
-    return async dispatch=>{
-        dispatch({
-            type:"UPDATE",
-            loading:true
-        });
-        try {
-            const data = await todoApi.update(body);
-            if(data.status=='success'){
-                dispatch({
-                    type:"UPDATE",
-                    loading:false,
-                    status:'success'
-                });
-                history.push('/todo/list')
-            }else{
-                dispatch({
-                    type:"UPDATE",
-                    loading:false,
-                    status:'error'
-                });
-            }
+const update = async (body)=>{
+    try {
+        const data = await todoApi.update(body);
+        return  data;
+    } catch (error) {
             
-        } catch (error) {
-            
-        }
     }
 }
 export const todoActions = {
