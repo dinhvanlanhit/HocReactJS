@@ -9,7 +9,7 @@ const initialState = {
 }
 const authReducer =(state=initialState,action)=>{
     switch(action.type){
-        case "LOGIN_SUCCESS":
+        case "LOGIN":
             return {
                 ...state,
                 number_code:action.number_code,
@@ -20,13 +20,6 @@ const authReducer =(state=initialState,action)=>{
                 data:action.data,
                 expires_in:action.expires_in,
             };
-        case "LOGIN_REQUEST":
-            return {
-                loggingIn: true,
-                user: action.user
-            };
-        case "LOGIN_FAILURE":
-            return {};
         case "LOGOUT":
             return {};
         default:

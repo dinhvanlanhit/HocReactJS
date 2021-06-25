@@ -1,23 +1,31 @@
 import todoApi from './../../api/todoApi'
-const getAll=()=>{
+const getList=(params)=>{
     return async dispatch=>{
         dispatch({
-            type:"GET_ALL",
+            type:"GET_LIST",
+            data:[],
+            totalPage:0,
             loading:true
         });
         try {
-            const data = await todoApi.getAll();
-            dispatch({
-                type:"GET_ALL",
-                data:data.data,
-                status:'success',
-                loading:false
-            });
+            const rs = await todoApi.getList(params);
+            if(rs.status==='success'){
+                dispatch({
+                    type:"GET_LIST",
+                    data:rs.result.data,
+                    totalPage:rs.result.totalPage,
+                    loading:false
+                });
+            }else{
+                dispatch({
+                    type:"GET_LIST",
+                    data:[],
+                    totalPage:0,
+                    loading:false
+                });
+            }
         } catch (error) {
-            dispatch({
-                type:"GET_ALL",
-                loading:false
-            });
+            
         }
     }
 }
@@ -27,28 +35,6 @@ const getByID = async (id)=>{
         return data;
     } catch (error) {
       console.log(error);
-    }
-}
-const search=(query)=>{
-    return async dispatch=>{
-        dispatch({
-            type:"SEARCH",
-            loading:true
-        });
-        try {
-            const data = await todoApi.search(query);
-            dispatch({
-                type:"SEARCH",
-                data:data.data,
-                status:'success',
-                loading:false
-            });
-        } catch (error) {
-            dispatch({
-                type:"SEARCH",
-                loading:false
-            });
-        }
     }
 }
 const create = async (body)=>{
@@ -76,8 +62,7 @@ const deleteData = async (id)=>{
     }
 }
 export const todoActions = {
-    getAll,
-    search,
+    getList,
     getByID,
     update,
     create,

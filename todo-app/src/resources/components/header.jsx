@@ -1,5 +1,5 @@
 import {Link,useHistory} from "react-router-dom";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 function Header(){
     const history = useHistory();
     const handleLogout=(e)=>{
@@ -8,7 +8,7 @@ function Header(){
     return(
         <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <Link className="navbar-brand" to="/admin">TODO-APP</Link>
+            <Link className="navbar-brand" to="/">TODO-APP</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon" />
             </button>
@@ -18,7 +18,7 @@ function Header(){
                     <Link className="nav-link" to="/">Dashboard</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/todo/list">Todo</Link>
+                    <Link className="nav-link" to="/todo/list"> Todo</Link>
                 </li>
                 </ul>
                 <form className="form-inline">
