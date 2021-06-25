@@ -8,7 +8,6 @@ function Pagination(props){
     const [pageCurrent,setPageCurrent]=useState(1);
     useEffect(function(){
         console.log("page", new URLSearchParams(search).get('page'))
-       console.log("page",page);
     },[])
     const pages = [];
     for(let i=1;i<Math.ceil(totalPage/limit);i++){
