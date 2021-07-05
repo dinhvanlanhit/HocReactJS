@@ -6,6 +6,8 @@ import Pagination from '../../components/pagination'
 import {todoActions} from '../../../redux/actions/todoAction'
 function TodoList(){
     const location = useLocation();
+    const getQueryParams=()=>{let t =location.search; if(!t||"string"!=typeof t||t.length<2)return new Map;const r=t.substr(1).split("&").map(t=>{const r=t.split("=");return[r[0],r[1]]});return new Map(r)};
+    const m = getQueryParams();
     const stateTodo = useSelector(state => state.todoReducer);
     const dispatch = useDispatch();
     const [keySearch,setKeySearch] = useState("");
@@ -30,7 +32,7 @@ function TodoList(){
             limit:limit
         }
        dispatch(todoActions.getList(params));
-    },[])
+    },[m.get('page')])
     return(
         <>
             <div className="card">
@@ -75,9 +77,8 @@ function TodoList(){
                         </div>
                         <div className="card-footer">
                             <Pagination 
-                                link={`${location.pathname}`}
                                 totalPage={stateTodo.totalPage}
-                                limit={10}
+                                limit={5}
                             />
                         </div>
             </div>
