@@ -4,15 +4,15 @@ import {useSelector,useDispatch} from 'react-redux'
 import ItemList from './components/item-todo';
 import Pagination from '../../components/pagination'
 import {todoActions} from '../../../redux/actions/todoAction'
+import AppMain from '../../../helpers/main'
 function TodoList(){
     const location = useLocation();
-    const getQueryParams=()=>{let t =location.search; if(!t||"string"!=typeof t||t.length<2)return new Map;const r=t.substr(1).split("&").map(t=>{const r=t.split("=");return[r[0],r[1]]});return new Map(r)};
-    const m = getQueryParams();
+    const m = AppMain.getQueryParams(location);
     const stateTodo = useSelector(state => state.todoReducer);
     const dispatch = useDispatch();
     const [keySearch,setKeySearch] = useState("");
-    const [start,setStart] = useState(0);
-    const [limit,setLimit] = useState(10);
+    const [page,setPage] = useState(0);
+    const [limit,setLimit] = useState(2);
     const handleChangeInputSearch=(e)=>{
         setKeySearch(e.target.value)
     }
@@ -20,15 +20,17 @@ function TodoList(){
         e.preventDefault();
         let params={
             query:keySearch,
-            start:start,
+            page:page,
             limit:limit
         }
         dispatch(todoActions.getList(params));
     }
     useEffect(function(){
+        let page = m.get('page');
+        setPage(page)
         let params={
             query:keySearch,
-            start:start,
+            page:page,
             limit:limit
         }
        dispatch(todoActions.getList(params));
@@ -70,15 +72,17 @@ function TodoList(){
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
+                                   
                                     <tbody>
                                             <ItemList lists={stateTodo.data}/> 
+                                            
                                     </tbody>
                                 </table>
                         </div>
                         <div className="card-footer">
                             <Pagination 
                                 totalPage={stateTodo.totalPage}
-                                limit={5}
+                                limit={limit}
                             />
                         </div>
             </div>

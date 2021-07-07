@@ -1,8 +1,8 @@
 import axiosClient from "./axiosClient";
 const todoApi ={
     getList:(params)=>{
-        const url = `/todo/getList?start=${params.start}&limit=${params.limit}&search=${params.query}`;
-        return axiosClient.get(url)
+        const url = `/todo/getList?page=${params.page}&limit=${params.limit}&search=${params.query}`;
+        return axiosClient.get(url);
     },
     create:(params)=>{
         const url = `/todo/create`;

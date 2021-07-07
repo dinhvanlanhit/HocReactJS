@@ -1,7 +1,9 @@
 import axios from 'axios';
 import queryString from 'query-string'
+// const baseURL = "http://todo.dinhvanlanh.com/api";
+const baseURL = "http://todoapp.com/api";
 const axiosClient = axios.create({
-    baseURL:"http://todo.dinhvanlanh.com/api",
+    baseURL:baseURL,
     headers:{
         'content-type':'application/json',
     },

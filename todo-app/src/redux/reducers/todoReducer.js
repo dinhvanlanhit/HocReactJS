@@ -1,8 +1,7 @@
 const initialState = {
     data:[],
     totalPage:0,
-    start:0,
-    limit:10,
+    page:0,
     loading:false
 }
 const todoReducer =(state = initialState,action)=>{

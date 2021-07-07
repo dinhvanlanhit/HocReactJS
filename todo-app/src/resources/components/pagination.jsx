@@ -7,9 +7,20 @@ function Pagination(props){
     const objSearch  = [...m].map(([name, value]) => ({ name, value }));
     const {limit,totalPage} = props;
     const history = useHistory();
-    const [pageCurrent,setPageCurrent] = useState(0);
-    const [stringSearch,setStringSearch] = useState("");
+    const [pramString,setPramString] = useState("");
+    const [pageCurrent,setPageCurrent] = useState();
+    const [numberPage,setNumberPage] = useState(()=>{
+        return Math.ceil(props.totalPage/props.limit);
+    });
+    const [pages,setPages] = useState(()=>{
+        let array = [];
+        for(let i=1;i<=numberPage;i++){
+            array.push(i);
+        }
+        return array;
+    });
     useEffect(function(){
+        console.log(pages);
         if(m.get('page')){
             setPageCurrent(m.get('page'));
         }else{
@@ -23,44 +34,44 @@ function Pagination(props){
                 }
             });
         }
-        setStringSearch(str);
+        setPramString(str);
     },[])
-    const pages = [];
-    for(let i=1;i<Math.ceil(totalPage/limit);i++){
-        pages.push(i);
-    }
     const handlePage =(number)=>{
         setPageCurrent(number);
     }
     const handlePrevious=(e)=>{
         e.preventDefault();
         if(pageCurrent>1){
-            setPageCurrent((pageCurrent-1));
-            let url = `${location.pathname}?page=${pageCurrent}${stringSearch}`;
+            let page = (pageCurrent-1);
+            setPageCurrent(page);
+            let url = `${location.pathname}?page=${page}${pramString}`;
             history.push(url);
         }
     }
     const handleNext=(e)=>{
         e.preventDefault();
-        if(pageCurrent<=(Math.ceil(totalPage/limit)-1)){
-            setPageCurrent((pageCurrent+1));
-            let url = `${location.pathname}?page=${pageCurrent}${stringSearch}`;
+        if(pageCurrent<=numberPage){
+            let page = (pageCurrent+1);
+            setPageCurrent(page);
+            let url = `${location.pathname}?page=${page}${pramString}`;
             history.push(url);
         }
     }
     const renderPagination =  pages.map((number)=>{
-        const url = `${location.pathname}?page=${number}${stringSearch}`;
+        const url = `${location.pathname}?page=${number}${pramString}`;
         return (
             <li  className={`page-item`+(number==pageCurrent?' active ':'')} key={number.toString()}><Link onClick={()=>handlePage(number)} className="btn page-link" to={url} >{number}</Link></li>
         );
     });
+    // console.log(pageCurrent,numberPage)
     return(
+       
         <>
         <nav aria-label="Page navigation example">
             <ul className="pagination">
                 <li className="page-item"><button disabled={pageCurrent==1?true:false} onClick={(e)=>handlePrevious(e)} className="page-link">Previous</button></li>
                     {renderPagination}
-                <li className="page-item"><button disabled={pageCurrent==(Math.ceil(totalPage/limit)-1)?true:false} onClick={(e)=>handleNext(e)} className="page-link">Next</button></li>
+                <li className="page-item"><button disabled={pageCurrent==numberPage?true:false} onClick={(e)=>handleNext(e)} className="page-link">Next</button></li>
             </ul>
         </nav>
         </>

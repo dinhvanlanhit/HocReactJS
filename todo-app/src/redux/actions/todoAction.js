@@ -9,7 +9,7 @@ const getList=(params)=>{
         });
         try {
             const rs = await todoApi.getList(params);
-            console.log(rs.result);
+            // console.log(rs.result);
             if(rs.status==='success'){
                 dispatch({
                     type:"GET_LIST",
