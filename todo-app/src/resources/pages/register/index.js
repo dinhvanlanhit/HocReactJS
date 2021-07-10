@@ -18,7 +18,6 @@ function Register(props){
         resolver: yupResolver(schema)
     });
     const handleRegister = (body)=>{
-      
         
     }
     return(

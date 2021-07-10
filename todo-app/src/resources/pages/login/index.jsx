@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,14 +10,18 @@ const schema = yup.object().shape({
     password: yup.string().required("Không được bỏ trống !"),
   });
 function Login(props){
+    const history = useHistory();
+    const stateAuth = useSelector((state)=>state.authReducer);
     const dispatch = useDispatch();
     const { register, handleSubmit, formState:{ errors } } = useForm({
         resolver: yupResolver(schema)
     });
     const handleLogin = (body)=>{
-        const action = authActions.login(body);
-        console.log(action);
-        dispatch(action);
+        dispatch(authActions.login(body));
+        console.log(stateAuth.number_code);
+        // if(stateAuth.number_code==0){
+        //     history.push('/');
+        // }
     }
     return(
         <div className="container">
@@ -34,6 +38,13 @@ function Login(props){
                                 <div className="form-group">
                                     <h1 className="text-center"><b>TODO APP</b></h1>
                                 </div>
+                                {stateAuth.message?
+                                    <div className="form-group">
+                                        <div className="alert alert-danger" role="alert">
+                                            {stateAuth.message}
+                                        </div>
+                                    </div>:<></>
+                                }
                                 <div className="form-group">
                                         <label>Email</label>
                                         <input {...register("email")} defaultValue="dinhvanlanh.it@gmail.com" placeholder="email ... " type="text" 
@@ -53,9 +64,8 @@ function Login(props){
                                     </div> 
                                     <div className="col-md-6">
                                         <button type="submit" className="btn btn-info btn-block pull-left">
-                                       
-                                         Login
-                                         </button>
+                                            {stateAuth.loading?'...':'Login'}
+                                        </button>
                                     </div>
                                 </div>
                             </form>

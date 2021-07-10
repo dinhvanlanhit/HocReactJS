@@ -16,9 +16,9 @@ const todoApi ={
         const url = `/todo/edit`;
         return axiosClient.post(url,params)
     },
-    delete:(params)=>{
-        const url = `/todo/delete/${params.id}`;
-        return axiosClient.post(url)
+    delete:(id)=>{
+        const url = `/todo/delete`;
+        return axiosClient.post(url,{id})
     }
 }
 export default todoApi;

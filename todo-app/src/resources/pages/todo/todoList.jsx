@@ -12,7 +12,7 @@ function TodoList(){
     const dispatch = useDispatch();
     const [keySearch,setKeySearch] = useState("");
     const [page,setPage] = useState(0);
-    const [limit,setLimit] = useState(2);
+    const [limit,setLimit] = useState(5);
     const handleChangeInputSearch=(e)=>{
         setKeySearch(e.target.value)
     }
@@ -33,8 +33,19 @@ function TodoList(){
             page:page,
             limit:limit
         }
-       dispatch(todoActions.getList(params));
-    },[m.get('page')])
+        dispatch(todoActions.getList(params));
+    },[m.get('page')]);
+    const handeDeleteItem = async (id)=>{
+        const rs = await todoActions.deleteData(id);
+        if(rs.status_code==0){
+            let params={
+                query:keySearch,
+                page:page,
+                limit:limit
+            }
+            dispatch(todoActions.getList(params));
+        }
+    }
     return(
         <>
             <div className="card">
@@ -51,7 +62,7 @@ function TodoList(){
                                     </div>
                                     <div className="col-md-2">
                                         <div className="form-group">
-                                            <button type="submit" className="btn btn-info btn-block"> {stateTodo.loading?'... !':'Seach'} </button>
+                                            <button type="submit" className="btn btn-info btn-block"> {stateTodo.loading==true?'... !':'Seach'} </button>
                                         </div>
                                     </div>
                                     <div className="col-md-2">
@@ -74,7 +85,7 @@ function TodoList(){
                                     </thead>
                                    
                                     <tbody>
-                                            <ItemList lists={stateTodo.data}/> 
+                                            <ItemList handeDeleteItem={handeDeleteItem} lists={stateTodo.data}/> 
                                             
                                     </tbody>
                                 </table>

@@ -1,26 +1,41 @@
+import history from "../../helpers/history";
 import authApi from "../../api/authApi"
 const login=(body)=>{
     return async dispatch => {
         dispatch({
             type:"LOGIN",
-            number_code: 0,
-            message: null,
-            status: null,
-            access_token:null,
-            token_type: null,
-            data:null,
-            expires_in: null
+            loading:true,
+            message:null,
         });
         try {
             const data = await authApi.login(body);
             if(data.number_code==0){
-                dispatch(data);
+                dispatch({
+                    type:"LOGIN",
+                    number_code: data.number_code,
+                    access_token: data.access_token,
+                    expires_in: data.expires_in,
+                    message:data.message,
+                    data:data.data,
+                    loading:false,
+                });
+                history.push('/')
             }else{
-
+                dispatch({
+                    type:"LOGIN",
+                    number_code: data.number_code,
+                    loading:false,
+                    message:data.message,
+                });
             }
         } catch (error) {
             console.log("login Lỗi")
         }
+    }
+}
+const register=(body)=>{
+    return async dispatch => {
+
     }
 }
 export const authActions = {

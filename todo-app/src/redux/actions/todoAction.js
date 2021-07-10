@@ -2,14 +2,11 @@ import todoApi from './../../api/todoApi'
 const getList=(params)=>{
     return async dispatch=>{
         dispatch({
-            type:"GET_LIST",
-            data:[],
-            totalPage:0,
+            type:"LOADING",
             loading:true
         });
         try {
             const rs = await todoApi.getList(params);
-            // console.log(rs.result);
             if(rs.status==='success'){
                 dispatch({
                     type:"GET_LIST",
@@ -19,14 +16,11 @@ const getList=(params)=>{
                 });
             }else{
                 dispatch({
-                    type:"GET_LIST",
-                    data:[],
-                    totalPage:0,
+                    type:"LOADING",
                     loading:false
                 });
             }
         } catch (error) {
-            
         }
     }
 }
@@ -51,11 +45,11 @@ const update = async (body)=>{
         const data = await todoApi.update(body);
         return  data;
     } catch (error) {
-            
     }
 }
 const deleteData = async (id)=>{
     try {
+        console.log(id);
         const data = await todoApi.delete(id);
         return  data;
     } catch (error) {
